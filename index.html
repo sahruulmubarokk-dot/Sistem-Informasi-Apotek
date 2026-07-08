@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ApotekSim - Sistem Informasi Apotek (Prototype)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .tab-content.hidden { display: none !important; }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 h-screen flex overflow-hidden">
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col justify-between flex-shrink-0">
+        <div class="flex-1 flex flex-col overflow-y-auto">
+            <!-- Brand / Logo -->
+            <div class="h-16 flex items-center px-6 border-b border-slate-800 gap-2">
+                <i data-lucide="activity" class="w-6 h-6 text-emerald-400"></i>
+                <span class="font-bold text-lg text-white tracking-wide">ApotekSim</span>
+            </div>
+            <!-- Navigation -->
+            <nav class="flex-1 px-4 py-4 space-y-1">
+                <button id="btn-pos-section" onclick="switchTab('pos-section')" class="nav-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all bg-emerald-600 text-white">
+                    <i data-lucide="shopping-cart" class="w-4 h-4"></i> Point of Sales (POS)
+                </button>
+                <button id="btn-analytics-section" onclick="switchTab('analytics-section')" class="nav-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all text-slate-400 hover:bg-slate-800 hover:text-white">
+                    <i data-lucide="bar-chart-2" class="w-4 h-4"></i> Ringkasan Eksekutif
+                </button>
+                <button id="btn-medicine-section" onclick="switchTab('medicine-section')" class="nav-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all text-slate-400 hover:bg-slate-800 hover:text-white">
+                    <i data-lucide="pill" class="w-4 h-4"></i> Master Data Obat
+                </button>
+                <button id="btn-supplier-section" onclick="switchTab('supplier-section')" class="nav-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all text-slate-400 hover:bg-slate-800 hover:text-white">
+                    <i data-lucide="truck" class="w-4 h-4"></i> Master Data Supplier
+                </button>
+                <button id="btn-restock-section" onclick="switchTab('restock-section')" class="nav-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all text-slate-400 hover:bg-slate-800 hover:text-white">
+                    <i data-lucide="clipboard-check" class="w-4 h-4"></i> Faktur Pembelian (Restock)
+                </button>
+            </nav>
+        </div>
+
+        <!-- Info Pengguna / Role -->
+        <div class="p-4 border-t border-slate-800 flex items-center gap-3 bg-slate-950">
+            <div class="w-9 h-9 rounded-full bg-slate-700 flex items-center justify-center font-bold text-sm text-emerald-400">
+                ADM
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium truncate">Apoteker Supervisor</p>
+                <p class="text-xs text-slate-400 truncate">Administrator & Kasir</p>
+            </div>
+            <i data-lucide="log-out" class="w-4 h-4 text-slate-500 hover:text-rose-400 cursor-pointer"></i>
+        </div>
+    </aside>
+
+    <!-- AREA KONTEN UTAMA -->
+    <main class="flex-1 flex flex-col h-full overflow-hidden">
+        
+        <!-- TOPBAR UTAMA -->
+        <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6 z-10 flex-shrink-0">
+            <div class="flex items-center gap-3">
+                <h2 id="page-title" class="text-xl font-bold text-slate-900">Point of Sales (POS) Apotek</h2>
+                <span class="px-2 py-0.5 text-xs bg-emerald-50 text-emerald-700 font-medium rounded-full border border-emerald-200 flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Sistem Terhubung
+                </span>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="text-right hidden sm:block">
+                    <p id="live-clock" class="text-sm font-semibold text-slate-700">30 Juni 2026 | 11:45 WIB</p>
+                    <p class="text-xs text-slate-400">Sistem Akurasi Basis Data FEFO Aktif</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- WRAPPER KONTEN DINAMIS (TABS) -->
+        <div class="flex-1 overflow-y-auto p-6 bg-slate-50">
+
+            <!-- ================= TAB 1: POINT OF SALES (POS) ================= -->
+            <section id="pos-section" class="tab-content grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Sisi Kiri: Katalog & Input Kasir -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Form Pindai & Tipe Transaksi -->
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Tipe Transaksi</label>
+                            <select id="transaction-type" onchange="togglePrescriptionForm()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm font-medium focus:outline-emerald-500">
+                                <option value="umum">Penjualan Umum (Tanpa Resep)</option>
+                                <option value="resep">Penjualan Resep Dokter</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Pencarian / Scan Barcode Obat</label>
+                            <div class="relative">
+                                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+                                <input type="text" placeholder="Masukkan nama obat, barcode, atau kategori (e.g., Paracetamol)..." class="w-full bg-slate-50 border border-slate-200 rounded-lg pl-10 pr-4 py-2 text-sm focus:outline-emerald-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulir Penyaringan Resep Medis (Kondisional) -->
+                    <div id="prescription-form" class="bg-amber-50/50 p-5 rounded-xl border border-amber-200 shadow-xs hidden transition-all">
+                        <div class="flex items-center gap-2 text-amber-800 mb-3">
+                            <i data-lucide="file-text" class="w-5 h-5"></i>
+                            <h3 class="font-bold text-sm">Dokumentasi & Regulasi Resep Dokter (Wajib Obat Keras/Narkotika)</h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-amber-900 mb-1">Nama Dokter</label>
+                                <input type="text" placeholder="Dr. Budi Santoso" class="w-full bg-white border border-amber-300 rounded-lg px-3 py-2 text-xs focus:outline-amber-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-amber-900 mb-1">No. SIP Dokter</label>
+                                <input type="text" placeholder="SIP/123/X/2025" class="w-full bg-white border border-amber-300 rounded-lg px-3 py-2 text-xs focus:outline-amber-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-amber-900 mb-1">Nama Pasien</label>
+                                <input type="text" placeholder="Ny. Ratna Sari" class="w-full bg-white border border-amber-300 rounded-lg px-3 py-2 text-xs focus:outline-amber-500">
+                            </div>
+                        </div>
+                        <div class="mt-3 flex items-center gap-2">
+                            <input type="checkbox" id="is-racikan" class="rounded border-amber-400 text-amber-600 focus:ring-amber-500">
+                            <label for="is-racikan" class="text-xs font-medium text-amber-900">Transaksi mencakup Obat Racikan (Sistem otomatis memotong multi-stok bahan baku)</label>
+                        </div>
+                    </div>
+
+                    <!-- Katalog Cepat & Status Stok FEFO -->
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                                <i data-lucide="layers" class="w-4 h-4 text-emerald-500"></i> Katalog Obat Terlaris (Real-time FEFO Queue)
+                            </h3>
+                            <span class="text-xs text-slate-500">Klik item untuk menambahkan ke keranjang</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Item 1 -->
+                            <div class="border border-slate-200 rounded-lg p-3 hover:border-emerald-500 hover:bg-emerald-50/10 cursor-pointer transition-all flex justify-between items-start">
+                                <div>
+                                    <span class="px-2 py-0.5 text-[10px] font-semibold bg-blue-50 text-blue-700 rounded-sm">Analgesik / Bebas</span>
+                                    <h4 class="font-bold text-sm text-slate-900 mt-1">Paracetamol 500mg</h4>
+                                    <p class="text-xs text-slate-400">Batch Terdekat: <span class="text-slate-600 font-medium">BCH-001</span></p>
+                                    <p class="text-[11px] text-rose-600 font-medium">ED: 12 Des 2026 (FEFO Antrean 1)</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-xs font-bold text-emerald-600 block">Rp 8.500 / Strip</span>
+                                    <span class="text-[11px] px-1.5 py-0.5 bg-slate-100 text-slate-700 rounded-full mt-2 inline-block">Stok: 142</span>
+                                </div>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div class="border border-slate-200 rounded-lg p-3 hover:border-emerald-500 hover:bg-emerald-50/10 cursor-pointer transition-all flex justify-between items-start">
+                                <div>
+                                    <span class="px-2 py-0.5 text-[10px] font-semibold bg-red-50 text-red-700 rounded-sm">Antibiotik / Obat Keras</span>
+                                    <h4 class="font-bold text-sm text-slate-900 mt-1">Amoxicillin 500mg</h4>
+                                    <p class="text-xs text-slate-400">Batch Terdekat: <span class="text-slate-600 font-medium">BCH-094</span></p>
+                                    <p class="text-[11px] text-amber-600 font-medium">ED: 24 Mar 2027</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-xs font-bold text-emerald-600 block">Rp 24.000 / Strip</span>
+                                    <span class="text-[11px] px-1.5 py-0.5 bg-slate-100 text-slate-700 rounded-full mt-2 inline-block">Stok: 85</span>
+                                </div>
+                            </div>
+
+                            <!-- Item 3 (Peringatan Stok Tipis) -->
+                            <div class="border border-rose-200 bg-rose-55/10 rounded-lg p-3 hover:border-rose-400 cursor-pointer transition-all flex justify-between items-start">
+                                <div>
+                                    <span class="px-2 py-0.5 text-[10px] font-semibold bg-purple-50 text-purple-700 rounded-sm">Diabetes / Resep</span>
+                                    <h4 class="font-bold text-sm text-slate-900 mt-1">Metformin HCl 500mg</h4>
+                                    <p class="text-xs text-slate-400">Batch Terdekat: <span class="text-slate-600 font-medium">BCH-022</span></p>
+                                    <p class="text-[11px] text-rose-600 font-medium">ED: 10 Okt 2026</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-xs font-bold text-emerald-600 block">Rp 15.500 / Strip</span>
+                                    <span class="text-[11px] px-1.5 py-0.5 bg-rose-100 text-rose-700 font-bold rounded-full mt-2 inline-block animate-pulse">Stok: 4 (Kritis)</span>
+                                </div>
+                            </div>
+
+                            <!-- Item 4 (Peringatan Kedaluwarsa Dekat) -->
+                            <div class="border border-amber-200 bg-amber-55/10 rounded-lg p-3 hover:border-amber-400 cursor-pointer transition-all flex justify-between items-start">
+                                <div>
+                                    <span class="px-2 py-0.5 text-[10px] font-semibold bg-orange-50 text-orange-700 rounded-sm">Vitamin / Suplemen</span>
+                                    <h4 class="font-bold text-sm text-slate-900 mt-1">Vitamin C 1000mg Non-Acid</h4>
+                                    <p class="text-xs text-slate-400">Batch Terdekat: <span class="text-slate-600 font-medium">BCH-003</span></p>
+                                    <p class="text-[11px] text-rose-700 font-bold bg-amber-100 px-1 py-0.5 rounded mt-1 inline-block"><i data-lucide="alert-triangle" class="w-3 h-3 inline mr-1"></i>ED Dekat: Sep 2026</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-xs font-bold text-emerald-600 block">Rp 32.000 / Botol</span>
+                                    <span class="text-[11px] px-1.5 py-0.5 bg-slate-100 text-slate-700 rounded-full mt-2 inline-block">Stok: 60</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sisi Kanan: Keranjang Belanja & Pembayaran -->
+                <div class="space-y-6">
+                    <div class="bg-white border border-slate-200 rounded-xl shadow-xs flex flex-col h-full overflow-hidden">
+                        <div class="p-4 border-b border-slate-200 bg-slate-900 text-white flex justify-between items-center">
+                            <h3 class="font-bold text-sm flex items-center gap-2"><i data-lucide="shopping-bag" class="w-4 h-4 text-emerald-400"></i> Ringkasan Invoice</h3>
+                            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-0.5 rounded">INV-20260630-01</span>
+                        </div>
+
+                        <!-- Daftar Item Keranjang Belanja -->
+                        <div class="p-4 flex-1 space-y-4 max-h-[280px] overflow-y-auto">
+                            <!-- Item Keranjang 1 -->
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-900">Paracetamol 500mg</h4>
+                                    <span class="text-[11px] text-slate-400">Rp 8.500 × 2 Strip</span>
+                                    <p class="text-[10px] text-emerald-600 font-medium">Batch: BCH-001 (Automated FEFO)</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="text-xs font-bold text-slate-900">Rp 17.000</span>
+                                    <button class="text-slate-300 hover:text-rose-500 transition-all"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Item Keranjang 2 -->
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-900">Amoxicillin 500mg</h4>
+                                    <span class="text-[11px] text-slate-400">Rp 24.000 × 1 Strip</span>
+                                    <p class="text-[10px] text-red-600 font-medium">Golongan Obat Keras Wajib Resep</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="text-xs font-bold text-slate-900">Rp 24.000</span>
+                                    <button class="text-slate-300 hover:text-rose-500 transition-all"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Perhitungan Finansial -->
+                        <div class="bg-slate-50 p-4 border-t border-slate-200 space-y-2">
+                            <div class="flex justify-between text-xs text-slate-500">
+                                <span>Subtotal Item</span>
+                                <span>Rp 41.000</span>
+                            </div>
+                            <div class="flex justify-between text-xs text-slate-500">
+                                <span>PPN Medis (11%)</span>
+                                <span>Rp 4.510</span>
+                            </div>
+                            <div class="flex justify-between text-base font-bold text-slate-900 border-t border-slate-200 pt-2 mt-1">
+                                <span>Total Bayar</span>
+                                <span class="text-emerald-600">Rp 45.510</span>
+                            </div>
+                        </div>
+
+                        <!-- Pilihan Pembayaran & Tombol Eksekusi -->
+                        <div class="p-4 bg-white border-t border-slate-200 space-y-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Metode Pembayaran</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <button class="border-2 border-emerald-500 bg-emerald-50 text-emerald-700 font-semibold p-2 rounded-lg text-xs flex flex-col items-center gap-1 justify-center">
+                                        <i data-lucide="banknote" class="w-4 h-4"></i> Tunai
+                                    </button>
+                                    <button class="border border-slate-200 text-slate-600 p-2 rounded-lg text-xs flex flex-col items-center gap-1 justify-center hover:bg-slate-50">
+                                        <i data-lucide="credit-card" class="w-4 h-4"></i> Debit/EDC
+                                    </button>
+                                    <button class="border border-slate-200 text-slate-600 p-2 rounded-lg text-xs flex flex-col items-center gap-1 justify-center hover:bg-slate-50">
+                                        <i data-lucide="qr-code" class="w-4 h-4"></i> QRIS Realtime
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 gap-2">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-500 mb-1">Uang Diterima (Tunai)</label>
+                                    <input type="text" value="Rp 50.000" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 font-bold text-sm focus:outline-emerald-500 text-right">
+                                </div>
+                                <div class="flex justify-between text-xs text-slate-500 py-1">
+                                    <span>Kembalian</span>
+                                    <span class="font-bold text-slate-800">Rp 4.490</span>
+                                </div>
+                            </div>
+
+                            <button class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm p-3 rounded-lg flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer">
+                                <i data-lucide="check-circle" class="w-4 h-4"></i> Selesaikan Transaksi & Cetak
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ================= TAB 2: RINGKASAN EKSEKUTIF (ANALYTICS Dashboard) ================= -->
+            <section id="analytics-section" class="tab-content hidden space-y-6">
+                <!-- Grid Informasi Utama (Stat Cards) -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-400 font-medium block">Total Omset Penjualan (Hari Ini)</span>
+                            <span class="text-2xl font-bold text-slate-900 mt-1">Rp 14.850.000</span>
+                            <span class="text-xs text-emerald-600 font-medium block mt-1"><i data-lucide="arrow-up-right" class="w-3 h-3 inline"></i> +12.4% vs Kemarin</span>
+                        </div>
+                        <div class="bg-emerald-50 p-3 rounded-xl text-emerald-600"><i data-lucide="trending-up" class="w-6 h-6"></i></div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-400 font-medium block">Transaksi Pembelian Restock</span>
+                            <span class="text-2xl font-bold text-slate-900 mt-1">Rp 8.240.000</span>
+                            <span class="text-xs text-slate-500 font-medium block mt-1">Bulan Juni 2026</span>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded-xl text-blue-600"><i data-lucide="shopping-bag" class="w-6 h-6"></i></div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-400 font-medium block">Alert Stok di Bawah Batas</span>
+                            <span class="text-2xl font-bold text-rose-600 mt-1">8 SKU Obat</span>
+                            <span class="text-xs text-rose-500 font-medium block mt-1">Butuh Purchase Order Segera</span>
+                        </div>
+                        <div class="bg-rose-50 p-3 rounded-xl text-rose-600"><i data-lucide="alert-octagon" class="w-6 h-6 animate-bounce"></i></div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-400 font-medium block">Batch Mendekati Kedaluwarsa</span>
+                            <span class="text-2xl font-bold text-amber-600 mt-1">3 Batch</span>
+                            <span class="text-xs text-amber-600 font-medium block mt-1">Masa kedaluwarsa &lt; 3 Bulan</span>
+                        </div>
+                        <div class="bg-amber-50 p-3 rounded-xl text-amber-600"><i data-lucide="hourglass" class="w-6 h-6"></i></div>
+                    </div>
+                </div>
+
+                <!-- Bagian Analisis Tren Bisnis -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Representasi Visual Fast Moving Items -->
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs lg:col-span-2">
+                        <h3 class="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2">
+                            <i data-lucide="bar-chart-3" class="w-4 h-4 text-emerald-500"></i> SKU Produk Terlaris (Fast-Moving Items Analysis)
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-xs font-medium text-slate-600 mb-1">
+                                    <span>Paracetamol 500mg (Strip)</span>
+                                    <span class="font-bold">1.240 Transaksi</span>
+                                </div>
+                                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                                    <div class="bg-emerald-500 h-full rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-medium text-slate-600 mb-1">
+                                    <span>Amoxicillin 500mg (Strip)</span>
+                                    <span class="font-bold">820 Transaksi</span>
+                                </div>
+                                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                                    <div class="bg-emerald-500 h-full rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-medium text-slate-600 mb-1">
+                                    <span>Vitamin C 1000mg (Botol)</span>
+                                    <span class="font-bold">450 Transaksi</span>
+                                </div>
+                                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                                    <div class="bg-emerald-500 h-full rounded-full" style="width: 35%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Audit Trail Log Aktivitas Karyawan -->
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs">
+                        <h3 class="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2">
+                            <i data-lucide="shield-alert" class="w-4 h-4 text-slate-500"></i> Sistem Keamanan / Audit Trail
+                        </h3>
+                        <div class="space-y-3 max-h-[160px] overflow-y-auto text-xs">
+                            <div class="border-l-2 border-emerald-500 pl-3 py-1">
+                                <p class="text-slate-500">11:32 WIB - <span class="text-slate-800 font-medium">Kasir_01</span> melakukan checkout INV-01</p>
+                            </div>
+                            <div class="border-l-2 border-blue-500 pl-3 py-1">
+                                <p class="text-slate-500">10:15 WIB - <span class="text-slate-800 font-medium">Admin_Msn</span> mengubah master data stok obat baru</p>
+                            </div>
+                            <div class="border-l-2 border-amber-500 pl-3 py-1">
+                                <p class="text-slate-500">08:00 WIB - <span class="text-slate-800 font-medium">System</span> mendeteksi Batch BCH-003 masuk antrean FEFO utama</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ================= TAB 3: MASTER DATA OBAT ================= -->
+            <section id="medicine-section" class="tab-content hidden space-y-6">
+                <!-- Atas: Form Tambah Data Master 1 & Pencarian -->
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs">
+                    <h3 class="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="plus-circle" class="w-4 h-4 text-emerald-500"></i> Entri Master Data Obat Baru</h3>
+                    <form class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Nama Produk / Obat</label>
+                            <input type="text" placeholder="Contoh: Cefadroxil 500mg" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Golongan / Kategori</label>
+                            <select class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-emerald-500">
+                                <option>Antibiotik (Obat Keras)</option>
+                                <option>Analgesik / Antipiretik</option>
+                                <option>Obat Bebas Terbatas</option>
+                                <option>Narkotika / Psikotropika</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Harga Jual Standar (Rp)</label>
+                            <input type="number" placeholder="25000" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Batas Stok Minimum Alert</label>
+                            <input type="number" placeholder="10" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-emerald-500">
+                        </div>
+                        <div class="md:col-span-4 text-right">
+                            <button type="button" class="bg-slate-900 text-white font-semibold text-xs px-4 py-2 rounded-lg hover:bg-slate-800 cursor-pointer">
+                                Simpan ke Database
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Bawah: Tabel Data Informasi Obat -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-xs overflow-hidden">
+                    <div class="p-4 border-b border-slate-200 bg-slate-50 flex justify-between items-center">
+                        <h3 class="text-sm font-bold text-slate-900">Arsitektur Tabel Master: `Tabel_Obat`</h3>
+                        <input type="text" placeholder="Saring tabel..." class="bg-white border border-slate-200 rounded-lg px-3 py-1 text-xs focus:outline-emerald-500 w-48">
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-600 font-semibold uppercase tracking-wider border-b border-slate-200">
+                                    <th class="p-3">ID_Obat (PK)</th>
+                                    <th class="p-3">Nama Obat</th>
+                                    <th class="p-3">Kategori</th>
+                                    <th class="p-3">Harga Jual</th>
+                                    <th class="p-3 text-center">Batas Min</th>
+                                    <th class="p-3 text-center">Stok Total Terkonsolidasi</th>
+                                    <th class="p-3 text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr>
+                                    <td class="p-3 font-mono font-medium text-slate-600">OBT-001</td>
+                                    <td class="p-3 font-bold text-slate-900">Paracetamol 500mg</td>
+                                    <td class="p-3">Analgesik</td>
+                                    <td class="p-3">Rp 8.500</td>
+                                    <td class="p-3 text-center">15</td>
+                                    <td class="p-3 text-center font-semibold text-emerald-600">142 Strip</td>
+                                    <td class="p-3 text-center">
+                                        <button class="text-blue-600 hover:underline mr-2">Edit</button>
+                                        <button class="text-rose-600 hover:underline">Hapus</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-mono font-medium text-slate-600">OBT-002</td>
+                                    <td class="p-3 font-bold text-slate-900">Amoxicillin 500mg</td>
+                                    <td class="p-3 text-red-600 font-medium">Antibiotik (Keras)</td>
+                                    <td class="p-3">Rp 24.000</td>
+                                    <td class="p-3 text-center">20</td>
+                                    <td class="p-3 text-center font-semibold text-emerald-600">85 Strip</td>
+                                    <td class="p-3 text-center">
+                                        <button class="text-blue-600 hover:underline mr-2">Edit</button>
+                                        <button class="text-rose-600 hover:underline">Hapus</button>
+                                    </td>
+                                </tr>
+                                <tr class="bg-rose-50/50">
+                                    <td class="p-3 font-mono font-medium text-slate-600">OBT-003</td>
+                                    <td class="p-3 font-bold text-slate-900">Metformin HCl 500mg</td>
+                                    <td class="p-3">Diabetes</td>
+                                    <td class="p-3">Rp 15.500</td>
+                                    <td class="p-3 text-center">10</td>
+                                    <td class="p-3 text-center font-bold text-rose-600">4 Strip (Alert)</td>
+                                    <td class="p-3 text-center">
+                                        <button class="text-blue-600 hover:underline mr-2">Order</button>
+                                        <button class="text-rose-600 hover:underline">Hapus</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ================= TAB 4: MASTER DATA SUPPLIER ================= -->
+            <section id="supplier-section" class="tab-content hidden space-y-6">
+                <!-- Entri Supplier Baru -->
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs">
+                    <h3 class="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="plus-circle" class="w-4 h-4 text-emerald-500"></i> Registrasi Master Supplier Baru</h3>
+                    <form class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Nama Perusahaan / Pemasok</label>
+                            <input type="text" placeholder="Contoh: PT. Kimia Farma Trading" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Narahubung / Kontak Telp</label>
+                            <input type="text" placeholder="021-xxxxxx atau 0812xxxx" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Alamat Kantor Pemasok</label>
+                            <input type="text" placeholder="Jl. Industri Medis No. 42, Jakarta" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-emerald-500">
+                        </div>
+                        <div class="md:col-span-3 text-right">
+                            <button type="button" class="bg-slate-900 text-white font-semibold text-xs px-4 py-2 rounded-lg hover:bg-slate-800 cursor-pointer">
+                                Simpan Supplier
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Tabel Data Supplier -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-xs overflow-hidden">
+                    <div class="p-4 border-b border-slate-200 bg-slate-50">
+                        <h3 class="text-sm font-bold text-slate-900">Arsitektur Tabel Master: `Tabel_Supplier`</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-600 font-semibold uppercase tracking-wider border-b border-slate-200">
+                                    <th class="p-3">ID_Supplier (PK)</th>
+                                    <th class="p-3">Nama Perusahaan Pemasok</th>
+                                    <th class="p-3">Kontak Telp</th>
+                                    <th class="p-3">Alamat Lengkap</th>
+                                    <th class="p-3 text-center">Status Hubungan</th>
+                                    <th class="p-3 text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr>
+                                    <td class="p-3 font-mono font-medium text-slate-600">SPL-001</td>
+                                    <td class="p-3 font-bold text-slate-900">PT. Kimia Farma Apotek, Tbk</td>
+                                    <td class="p-3">021-3847721</td>
+                                    <td class="p-3">Jl. Veteran No. 9, Jakarta Pusat</td>
+                                    <td class="p-3 text-center"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded font-medium">Aktif / Utama</span></td>
+                                    <td class="p-3 text-center"><button class="text-blue-600 hover:underline">Kelola</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-mono font-medium text-slate-600">SPL-002</td>
+                                    <td class="p-3 font-bold text-slate-900">PT. Mensa Bina Sukses (MBS)</td>
+                                    <td class="p-3">031-8491032</td>
+                                    <td class="p-3">Kawasan Industri Rungkut, Surabaya</td>
+                                    <td class="p-3 text-center"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded font-medium">Aktif</span></td>
+                                    <td class="p-3 text-center"><button class="text-blue-600 hover:underline">Kelola</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ================= TAB 5: TRANSAKSI PEMBELIAN / RESTOCK ================= -->
+            <section id="restock-section" class="tab-content hidden space-y-6">
+                <!-- Form Pencatatan Transaksi Pembelian -->
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs space-y-4">
+                    <div class="border-b border-slate-100 pb-3">
+                        <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                            <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-500"></i> Dokumentasi Faktur Restock (`Pembelian_Obat`)
+                        </h3>
+                        <p class="text-xs text-slate-400">Proses ini akan mengaitkan `ID_Supplier` dan menambahkan stok ke `Tabel_Obat` secara otomatis berbasis data Batch.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Nomor Faktur Supplier</label>
+                            <input type="text" placeholder="FAK-MBS-99104" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-emerald-500 font-mono font-bold">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Pilih Supplier Pemasok (FK)</label>
+                            <select class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-emerald-500 font-medium">
+                                <option value="SPL-001">PT. Kimia Farma Apotek, Tbk (SPL-001)</option>
+                                <option value="SPL-002">PT. Mensa Bina Sukses (MBS) (SPL-002)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Tanggal Transaksi Masuk</label>
+                            <input type="date" value="2026-06-30" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-emerald-500">
+                        </div>
+                    </div>
+
+                    <!-- Detail Item Multi-Row Form (Bridge Table Simulation) -->
+                    <div class="border border-slate-200 rounded-lg overflow-hidden bg-slate-50/50 p-4 space-y-3">
+                        <span class="text-xs font-bold text-slate-700 block">Item Produk dalam Faktur (`Detail_Pembelian_Obat`)</span>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-5 gap-3 bg-white p-3 rounded-lg border border-slate-200 items-end">
+                            <div class="md:col-span-2">
+                                <label class="block text-[11px] font-medium text-slate-500 mb-1">Pilih Obat (FK)</label>
+                                <select class="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1 text-xs focus:outline-emerald-500">
+                                    <option value="OBT-001">Paracetamol 500mg (OBT-001)</option>
+                                    <option value="OBT-002">Amoxicillin 500mg (OBT-002)</option>
+                                    <option value="OBT-003">Metformin HCl 500mg (OBT-003)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-medium text-slate-500 mb-1">Jumlah Masuk (Qty)</label>
+                                <input type="number" value="100" class="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1 text-xs focus:outline-emerald-500">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-medium text-slate-500 mb-1">Harga Beli Satuan (Rp)</label>
+                                <input type="number" value="6200" class="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1 text-xs focus:outline-emerald-500">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-medium text-slate-500 mb-1">Tanggal Kedaluwarsa Batch</label>
+                                <input type="date" value="2028-12-01" class="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1 text-xs focus:outline-emerald-500 font-semibold text-rose-600">
+                            </div>
+                        </div>
+
+                        <button type="button" class="text-xs font-semibold text-emerald-600 hover:text-emerald-700 flex items-center gap-1"><i data-lucide="plus" class="w-3 h-3"></i> Tambah Item Baris Faktur</button>
+                    </div>
+
+                    <div class="flex justify-between items-center pt-2">
+                        <div class="text-sm">
+                            <span class="text-slate-500">Kalkulasi Total Pengeluaran Faktur:</span>
+                            <span class="font-bold text-slate-900 ml-1">Rp 620.000</span>
+                        </div>
+                        <button type="button" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-5 py-2.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer">
+                            <i data-lucide="save" class="w-4 h-4"></i> Validasi & Eksekusi Pembelian (Restock)
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- LOGIKA SKRIP SWITCHER TAB STATIS (Ready Pemindahan Komponen ke Framework) -->
+    <script>
+        function switchTab(sectionId) {
+            // Sembunyikan semua elemen konten tab
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.add('hidden'));
+            
+            // Tampilkan tab yang dipilih
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // Atur ulang warna/desain tombol navigasi aktif
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-emerald-600', 'text-white');
+                btn.classList.add('text-slate-400', 'hover:bg-slate-800', 'hover:text-white');
+            });
+            
+            // Berikan highlight warna pada tombol aktif
+            const activeBtn = document.getElementById('btn-' + sectionId);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-slate-400', 'hover:bg-slate-800', 'hover:text-white');
+                activeBtn.classList.add('bg-emerald-600', 'text-white');
+            }
+
+            // Ubah teks judul halaman pada topbar sesuai konteks tab
+            const pageTitle = document.getElementById('page-title');
+            if (sectionId === 'pos-section') pageTitle.innerText = "Point of Sales (POS) Apotek";
+            if (sectionId === 'analytics-section') pageTitle.innerText = "Ringkasan Eksekutif & Analitik";
+            if (sectionId === 'medicine-section') pageTitle.innerText = "Manajemen Database Master Obat";
+            if (sectionId === 'supplier-section') pageTitle.innerText = "Manajemen Database Master Supplier";
+            if (sectionId === 'restock-section') pageTitle.innerText = "Dokumentasi Faktur Pembelian Obat";
+        }
+
+        function togglePrescriptionForm() {
+            const selectElement = document.getElementById('transaction-type');
+            const pForm = document.getElementById('prescription-form');
+            if (selectElement.value === 'resep') {
+                pForm.classList.remove('hidden');
+            } else {
+                pForm.classList.add('hidden');
+            }
+        }
+
+        // Inisialisasi ikon Lucide agar merender elemen SVG grafis modern
+        lucide.createIcons();
+    </script>
+</body>
+</html>

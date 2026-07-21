@@ -15,7 +15,7 @@
 [![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com/)
 [![Python Generator](https://img.shields.io/badge/Python-Docx_%26_PPTX-3776AB?style=for-the-badge&logo=python)](https://python.org/)
 
-[🖥️ Interactive UI Demo](docs/demo/index.html) • [📜 Master Prompt Pipeline](history-promt.md) • [📄 Laporan Academic (.docx)](docs/reports/laporan_akhir_pbl_apotek.docx) • [📊 Slide Presentasi (.pptx)](docs/reports/presentasi-proyek.pptx)
+[🖥️ Interactive UI Demo](docs/demo/index.html) • [📹 Video Demonstrasi MP4](docs/reports/vidio-demonstrasi.mp4) • [📜 Master Prompt Pipeline](docs/notes/history-promt.md) • [📄 Laporan Academic (.docx)](docs/reports/laporan_akhir_pbl_apotek.docx) • [📊 Slide Presentasi (.pptx)](docs/reports/presentasi-proyek.pptx)
 
 ---
 
@@ -138,7 +138,6 @@ Sistem-Informasi-Apotek/
 │   ├── demo/                   # Standalone Interactive HTML Prototype (index.html)
 │   └── notes/                  # Format Laporan, Prompt Notes, & Master Prompt Pipeline
 ├── .gitignore                  # Aturan penanganan file sampel, env, & lock files
-├── history-promt.md            # Dokumentasi Lengkap Master Prompt Pipeline (Prompt 1 - 9)
 └── README.md                   # Dokumentasi Utama Repositori (File Ini)
 ```
 
@@ -200,11 +199,12 @@ py docs/generators/generate_pptx.py
 
 ## 📑 Indeks Dokumentasi Proyek
 
-- **[📜 Master Prompt Pipeline Guide](history-promt.md)**: Panduan urutan prompt 1-9 dari konsep hingga deployment.
-- **[📄 Laporan Akhir PBL (.docx)](docs/reports/laporan_akhir_pbl_apotek.docx)**: Dokumen formal akademik lengkap dengan spasi 1.5 dan margin kaku 4-3-3-3cm.
-- **[📊 Slide Presentasi Proyek (.pptx)](docs/reports/presentasi-proyek.pptx)**: Presentation deck 16:9 berdesain profesional.
-- **[⚙️ Generator Script Laporan](docs/generators/generate_report.py)**: Script Python pembentuk dokumen Word.
-- **[🎨 Generator Script Presentasi](docs/generators/generate_pptx.py)**: Script Python pembentuk slide PowerPoint.
+- [📹 Video Demonstrasi Sistem (.mp4)](docs/reports/vidio-demonstrasi.mp4): Berkas video rekaman peragaan fitur 3 role (Admin, Apoteker, Kasir).
+- [📜 Master Prompt Pipeline Guide](docs/notes/history-promt.md): Panduan urutan prompt 1-9 dari konsep hingga deployment.
+- [📄 Laporan Akhir PBL (.docx)](docs/reports/laporan_akhir_pbl_apotek.docx): Dokumen formal akademik lengkap dengan spasi 1.5 dan margin kaku 4-3-3-3cm.
+- [📊 Slide Presentasi Proyek (.pptx)](docs/reports/presentasi-proyek.pptx): Presentation deck 16:9 berdesain profesional.
+- [⚙️ Generator Script Laporan](docs/generators/generate_report.py): Script Python pembentuk dokumen Word.
+- [🎨 Generator Script Presentasi](docs/generators/generate_pptx.py): Script Python pembentuk slide PowerPoint.
 
 ---
 

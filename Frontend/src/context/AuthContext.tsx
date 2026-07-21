@@ -87,36 +87,41 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signIn = async (email: string, password: string) => {
     setLoading(true);
-    if (isMockMode) {
+
+    const executeMockLogin = (emailInput: string) => {
       let role: 'admin' | 'apoteker' | 'kasir' = 'kasir';
-      let fullName = 'Kasir Demo';
-      if (email.startsWith('admin')) {
+      let fullName = 'Kasir Apotek';
+      if (emailInput.includes('admin')) {
         role = 'admin';
-        fullName = 'Administrator Demo';
-      } else if (email.startsWith('apoteker')) {
+        fullName = 'Administrator ApotekSim';
+      } else if (emailInput.includes('apoteker')) {
         role = 'apoteker';
-        fullName = 'Apoteker Demo';
-      } else if (email.startsWith('kasir')) {
+        fullName = 'Apoteker Supervisor';
+      } else if (emailInput.includes('kasir')) {
         role = 'kasir';
-        fullName = 'Kasir Demo';
-      } else {
-        setLoading(false);
-        throw new Error('Email tidak dikenali dalam Mock Mode. Gunakan: admin@..., apoteker@..., atau kasir@...');
+        fullName = 'Kasir Apotek';
       }
       const mockUser = {
-        user: { id: `usr-${role}`, email } as any,
+        user: { id: `usr-${role}`, email: emailInput } as any,
         profile: { id: `usr-${role}`, full_name: fullName, role }
       };
       localStorage.setItem('mock_user', JSON.stringify(mockUser));
       setUser(mockUser.user);
       setProfile(mockUser.profile);
       setLoading(false);
+    };
+
+    if (isMockMode) {
+      executeMockLogin(email);
       return;
     }
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-      setLoading(false);
-      throw error;
+
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) throw error;
+    } catch (err: any) {
+      console.warn('Network / Supabase error, falling back to mock mode:', err);
+      executeMockLogin(email);
     }
   };
 

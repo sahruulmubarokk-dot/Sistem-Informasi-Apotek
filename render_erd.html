@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Render Diagram ERD</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      securityLevel: 'loose',
+      er: { useMaxWidth: false }
+    });
+  </script>
+  <style>
+    body {
+      background-color: #f8fafc;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Times New Roman', Times, serif;
+    }
+    table.screenshot-table {
+      width: 12.7cm;
+      height: 7.53cm;
+      border: 1px solid #475569;
+      border-collapse: collapse;
+      background-color: #ffffff;
+    }
+    td.content-cell {
+      padding: 20px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+    .mermaid svg {
+      max-width: 100% !important;
+      max-height: 100% !important;
+      width: auto !important;
+      height: auto !important;
+    }
+  </style>
+</head>
+<body>
+  <table class="screenshot-table" id="diagram-table">
+    <tr>
+      <td class="content-cell">
+        <div class="mermaid">
+          erDiagram
+            Supplier {
+              UUID ID_Supplier PK
+              VARCHAR Nama_Supplier
+              VARCHAR No_Telepon
+              TEXT Alamat
+              TIMESTAMP Created_At
+            }
+            Obat {
+              UUID ID_Obat PK
+              VARCHAR Nama_Obat
+              VARCHAR Kategori_Obat
+              DECIMAL Harga_Jual
+              INT Batas_Minimum_Stok
+              INT Stok_Total
+            }
+            Pembelian_Obat {
+              UUID ID_Pembelian PK
+              VARCHAR No_Faktur
+              UUID ID_Supplier FK
+              DATE Tanggal_Pembelian
+              DECIMAL Total_Pengeluaran
+              UUID Admin_Penginput
+            }
+            Detail_Pembelian_Obat {
+              UUID ID_Detail_Pembelian PK
+              UUID ID_Pembelian FK
+              UUID ID_Obat FK
+              VARCHAR Nomor_Batch
+              INT Jumlah_Masuk
+              INT Stok_Sisa_Batch
+              DECIMAL Harga_Beli_Satuan
+              DATE Tanggal_Kedaluwarsa
+            }
+            
+            Supplier ||--o{ Pembelian_Obat : "memasok"
+            Pembelian_Obat ||--|{ Detail_Pembelian_Obat : "memiliki"
+            Obat ||--|{ Detail_Pembelian_Obat : "tercatat_di"
+        </div>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

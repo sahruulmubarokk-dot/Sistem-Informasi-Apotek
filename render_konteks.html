@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Render Diagram Konteks</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      securityLevel: 'loose',
+      flowchart: { useMaxWidth: false, htmlLabels: true }
+    });
+  </script>
+  <style>
+    body {
+      background-color: #f8fafc;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Times New Roman', Times, serif;
+    }
+    table.screenshot-table {
+      width: 12.7cm;
+      height: 7.53cm;
+      border: 1px solid #475569;
+      border-collapse: collapse;
+      background-color: #ffffff;
+    }
+    td.content-cell {
+      padding: 20px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+    .mermaid svg {
+      max-width: 100% !important;
+      max-height: 100% !important;
+      width: auto !important;
+      height: auto !important;
+    }
+  </style>
+</head>
+<body>
+  <table class="screenshot-table" id="diagram-table">
+    <tr>
+      <td class="content-cell">
+        <div class="mermaid">
+          graph TD
+            Admin([Admin]) -->|Input Master Obat, Supplier, Restock Faktur| ApotekSim["Sistem Informasi Apotek (ApotekSim)"]
+            ApotekSim -->|Status Stok, Alert Stok Minimum, Log Aktivitas| Admin
+            
+            Apoteker([Apoteker]) -->|Cek Stok Obat, Update Batch| ApotekSim
+            ApotekSim -->|Info Validitas Batch dan ED| Apoteker
+            
+            Kasir([Kasir]) -->|Input Transaksi Penjualan, Skrining Resep| ApotekSim
+            ApotekSim -->|Katalog Terurut FEFO, Cetak Struk/Faktur| Kasir
+            
+            Supplier([Supplier]) -->|Faktur dan Suplai Obat Baru| ApotekSim
+            ApotekSim -->|Purchase Order / Data Faktur Masuk| Supplier
+
+            style ApotekSim fill:#059669,stroke:#047857,stroke-width:3px,color:#fff
+            style Admin fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a
+            style Apoteker fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a
+            style Kasir fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a
+            style Supplier fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#0f172a
+        </div>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

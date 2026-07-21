@@ -7,8 +7,8 @@
 ### **Tugas Kuliah Project-Based Learning (PBL) - Universitas Dr. Soetomo (UNITOMO)**
 **Pembangunan Sistem Informasi Apotek Modern Berbasis AI Assistant, Multi-Batch FEFO, POS Kasir, & Database Row Level Security (RLS)**
 
-[![AI Agent](https://img.shields.io/badge/AI_Engine-Google_Gemini_Antigravity-8E44AD?style=for-the-badge&logo=google)](https://deepmind.google/)
-[![AI Collaboration](https://img.shields.io/badge/AI_Collaboration-ChatGPT_Canvas-10A37F?style=for-the-badge&logo=openai)](https://chatgpt.com/)
+[![AI Agent](https://img.shields.io/badge/AI_Agent-Gemini_%2B_Claude_Antigravity-8E44AD?style=for-the-badge&logo=google)](https://deepmind.google/)
+[![AI Canvas](https://img.shields.io/badge/AI_Canvas-Gemini_Canvas-4285F4?style=for-the-badge&logo=google)](https://gemini.google.com/)
 [![React](https://img.shields.io/badge/React-18.x-blue?style=for-the-badge&logo=react)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-38BDF8?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
@@ -29,12 +29,12 @@ Fokus utama dari proyek ini adalah **mengimplementasikan Metodologi Pengembangan
 
 ### 🛠️ AI Tools & Teknologi Kecerdasan Buatan yang Digunakan:
 
-| Tool AI / Engine | Peran & Kontribusi Utama dalam Proyek |
-| :--- | :--- |
-| 🟣 **Google Gemini Antigravity (Agentic AI)** | AI Agent utama untuk *autonomous coding*, pembuatan struktur repositori, refactoring Fullstack React + Supabase, penulisan script generator Python (`docx`/`pptx`), pengujian sistem, dan perapihan repositori. |
-| 🟢 **ChatGPT Canvas / OpenAI** | Penyusunan prompt awal, eksperimentasi konsep arsitektur basis data, serta pembentukan berkas panduan transformasi dinamis (`prompt.md`). |
-| 🧜‍♂️ **Mermaid.js Engine** | Menghasilkan diagram visual sistem (Diagram Konteks, DFD Level 0, & ERD) secara otomatis via sintaks deklaratif. |
-| 🐍 **Python (`python-docx` & `python-pptx`)** | Script otomatisasi berbasis AI untuk meng-generate dokumen Laporan Akhir PBL sesuai margin akademik kaku (4-3-3-3cm) dan slide presentasi 16:9 modern. |
+| Tool AI / Engine | Tahapan Penggunaan | Peran & Kontribusi Utama dalam Proyek |
+| :--- | :---: | :--- |
+| 🔵 **Gemini Canvas** | **Step 1 - 4** | Eksperimentasi konsep arsitektur basis data, perencanaan workflow, pembuatan prototipe UI HTML statis (`index.html`), dan penyusunan blueprint migrasi dinamis (`prompt.md`). |
+| 🤖 **Gemini + Claude (Antigravity Agent)** | **Step 5 - 9** | *Autonomous Agentic Coding* untuk refactoring Fullstack React + Supabase, pembuatan diagram Mermaid, penulisan script generator Python (`docx`/`pptx`), pengujian sistem, dan perapihan repositori. |
+| 🧜‍♂️ **Mermaid.js Engine** | **Step 6** | Menghasilkan diagram visual sistem (Diagram Konteks, DFD Level 0, & ERD) secara otomatis via sintaks deklaratif. |
+| 🐍 **Python (`python-docx` & `python-pptx`)** | **Step 7 - 8** | Script otomatisasi berbasis AI untuk meng-generate dokumen Laporan Akhir PBL sesuai margin akademik kaku (4-3-3-3cm) dan slide presentasi 16:9 modern. |
 
 ---
 
@@ -44,29 +44,29 @@ Pengembangan proyek ini menggunakan alur **9-Stage Master Prompt Pipeline** yang
 
 ```mermaid
 graph TD
-    P1["PROMPT 1: Konsep DB & Fitur"] --> P2["PROMPT 2: Workflow & Tech Stack"]
-    P2 --> P3["PROMPT 3: Prototipe HTML Statis"]
-    P3 --> P4["PROMPT 4: Blueprint Transformasi Supabase"]
-    P4 --> P5["PROMPT 5: Eksekusi Fullstack Web App"]
-    P5 --> P6["PROMPT 6: Diagram Mermaid (DFD/ERD)"]
-    P6 --> P7["PROMPT 7: Generator Laporan Academic DOCX"]
-    P7 --> P8["PROMPT 8: Generator Presentasi PPTX"]
-    P8 --> P9["PROMPT 9: Restrukturisasi Repositori & README"]
+    P1["PROMPT 1: Konsep DB & Fitur (Gemini Canvas)"] --> P2["PROMPT 2: Workflow & Tech Stack (Gemini Canvas)"]
+    P2 --> P3["PROMPT 3: Prototipe HTML Statis (Gemini Canvas)"]
+    P3 --> P4["PROMPT 4: Blueprint Transformasi Supabase (Gemini Canvas)"]
+    P4 --> P5["PROMPT 5: Eksekusi Fullstack Web App (Gemini + Claude Antigravity)"]
+    P5 --> P6["PROMPT 6: Diagram Mermaid DFD/ERD (Gemini + Claude Antigravity)"]
+    P6 --> P7["PROMPT 7: Generator Laporan Academic DOCX (Gemini + Claude Antigravity)"]
+    P7 --> P8["PROMPT 8: Generator Presentasi PPTX (Gemini + Claude Antigravity)"]
+    P8 --> P9["PROMPT 9: Restrukturisasi Repositori & README (Gemini + Claude Antigravity)"]
 ```
 
 ### 📋 Ringkasan Matriks Prompt Engineering:
 
 | Tahap | Fokus Prompt | Input & Prasyarat | Output yang Dihasilkan | Alat AI Utama |
 | :---: | :--- | :--- | :--- | :---: |
-| **1** | **Arsitektur DB & Fitur** | Spesifikasi Bisnis Apotek | Schema 3 Tabel Utama & Blueprint Fitur Admin/Kasir | ChatGPT / Gemini |
-| **2** | **Workflow & Tech Stack** | Hasil Prompt 1 | Alur Bisnis Step-by-Step & Stack React + Supabase | ChatGPT / Gemini |
-| **3** | **UI Prototype HTML** | Hasil Prompt 1 & 2 | Single-file UI Prototype [`docs/demo/index.html`](docs/demo/index.html) | ChatGPT Canvas |
-| **4** | **Blueprint Migration (`prompt.md`)** | File `index.html` | Dokumentasi Analisis Celah & SoC Guide (`prompt.md`) | ChatGPT Canvas |
-| **5** | **Fullstack Execution** | `index.html` & `prompt.md` | Aplikasi Web Modern di [`Frontend/`](Frontend/) & [`Backend/`](Backend/) | **Gemini Antigravity Agent** |
-| **6** | **Diagram System Rendering** | Schema DB & Workflow | HTML Diagram Renderers di [`docs/diagrams_html/`](docs/diagrams_html/) | **Gemini Antigravity Agent** |
-| **7** | **Academic DOCX Generator** | Data Proyek & Testing | Script [`docs/generators/generate_report.py`](docs/generators/generate_report.py) -> `.docx` | **Gemini Antigravity Agent** |
-| **8** | **Presentation PPTX Generator** | Visual Assets & Metrics | Script [`docs/generators/generate_pptx.py`](docs/generators/generate_pptx.py) -> `.pptx` | **Gemini Antigravity Agent** |
-| **9** | **Repo Restructuring & README** | Seluruh Berkas Proyek | Folder `docs/` Terorganisir, `.gitignore`, & `README.md` | **Gemini Antigravity Agent** |
+| **1** | **Arsitektur DB & Fitur** | Spesifikasi Bisnis Apotek | Schema 3 Tabel Utama & Blueprint Fitur Admin/Kasir | **Gemini Canvas** |
+| **2** | **Workflow & Tech Stack** | Hasil Prompt 1 | Alur Bisnis Step-by-Step & Stack React + Supabase | **Gemini Canvas** |
+| **3** | **UI Prototype HTML** | Hasil Prompt 1 & 2 | Single-file UI Prototype [`docs/demo/index.html`](docs/demo/index.html) | **Gemini Canvas** |
+| **4** | **Blueprint Migration (`prompt.md`)** | File `index.html` | Dokumentasi Analisis Celah & SoC Guide (`prompt.md`) | **Gemini Canvas** |
+| **5** | **Fullstack Execution** | `index.html` & `prompt.md` | Aplikasi Web Modern di [`Frontend/`](Frontend/) & [`Backend/`](Backend/) | **Gemini + Claude Antigravity Agent** |
+| **6** | **Diagram System Rendering** | Schema DB & Workflow | HTML Diagram Renderers di [`docs/diagrams_html/`](docs/diagrams_html/) | **Gemini + Claude Antigravity Agent** |
+| **7** | **Academic DOCX Generator** | Data Proyek & Testing | Script [`docs/generators/generate_report.py`](docs/generators/generate_report.py) -> `.docx` | **Gemini + Claude Antigravity Agent** |
+| **8** | **Presentation PPTX Generator** | Visual Assets & Metrics | Script [`docs/generators/generate_pptx.py`](docs/generators/generate_pptx.py) -> `.pptx` | **Gemini + Claude Antigravity Agent** |
+| **9** | **Repo Restructuring & README** | Seluruh Berkas Proyek | Folder `docs/` Terorganisir, `.gitignore`, & `README.md` | **Gemini + Claude Antigravity Agent** |
 
 > 💡 *Sintaks lengkap dan instruksi rinci dari setiap prompt dapat diakses di dokumen **[history-promt.md](history-promt.md)**.*
 

@@ -8,19 +8,19 @@ Dokumen ini berisi rangkaian **Prompt Terhubung (Step-by-Step Prompt Engineering
 
 ```mermaid
 graph TD
-    P1[PROMPT 1: Konsep DB & Fitur] --> P2[PROMPT 2: Workflow & Tech Stack]
-    P2 --> P3[PROMPT 3: Prototipe HTML Statis]
-    P3 --> P4[PROMPT 4: Blueprint Transformasi Supabase]
-    P4 --> P5[PROMPT 5: Eksekusi Fullstack Web App]
-    P5 --> P6[PROMPT 6: Visualisasi Diagram Mermaid]
-    P6 --> P7[PROMPT 7: Generator Laporan Academic DOCX]
-    P7 --> P8[PROMPT 8: Generator Presentasi PPTX]
-    P8 --> P9[PROMPT 9: Restrukturisasi Docs & README GitHub]
+    P1["PROMPT 1: Konsep DB & Fitur (Gemini Canvas)"] --> P2["PROMPT 2: Workflow & Tech Stack (Gemini Canvas)"]
+    P2 --> P3["PROMPT 3: Prototipe HTML Statis (Gemini Canvas)"]
+    P3 --> P4["PROMPT 4: Blueprint Transformasi Supabase (Gemini Canvas)"]
+    P4 --> P5["PROMPT 5: Eksekusi Fullstack Web App (Gemini + Claude Antigravity)"]
+    P5 --> P6["PROMPT 6: Diagram Mermaid DFD/ERD (Gemini + Claude Antigravity)"]
+    P6 --> P7["PROMPT 7: Generator Laporan Academic DOCX (Gemini + Claude Antigravity)"]
+    P7 --> P8["PROMPT 8: Generator Presentasi PPTX (Gemini + Claude Antigravity)"]
+    P8 --> P9["PROMPT 9: Restrukturisasi Repositori & README (Gemini + Claude Antigravity)"]
 ```
 
 ---
 
-## 📜 PROMPT 1: Perancangan Arsitektur Basis Data & Blueprint Fitur
+## 📜 PROMPT 1: Perancangan Arsitektur Basis Data & Blueprint Fitur (Gemini Canvas)
 
 **Target**: Rancang konsep arsitektur basis data relasional dan pemetaan fitur untuk sistem informasi berbasis web.
 
@@ -43,7 +43,7 @@ Tugas Anda:
 
 ---
 
-## 📜 PROMPT 2: Workflow Sistem & Rekomendasi Tech Stack
+## 📜 PROMPT 2: Workflow Sistem & Rekomendasi Tech Stack (Gemini Canvas)
 
 **Target**: Susun alur kerja (*workflow*) sistem yang komprehensif dan tentukan rekomendasi *tech stack* berbasis hasil dari PROMPT 1.
 
@@ -58,7 +58,7 @@ Tugas Anda:
 
 ---
 
-## 📜 PROMPT 3: Prototipe HTML Statis (Single-File Prototype)
+## 📜 PROMPT 3: Prototipe HTML Statis (Gemini Canvas)
 
 **Target**: Generate kode implementasi berbasis HTML statis untuk merepresentasikan antarmuka pengguna (Frontend) dan dashboard admin berdasarkan rancangan PROMPT 1 & 2.
 
@@ -74,7 +74,7 @@ Spesifikasi Kode & UI:
 
 ---
 
-## 📜 PROMPT 4: Blueprint Transformasi Dynamic Supabase (`prompt.md`)
+## 📜 PROMPT 4: Blueprint Transformasi Dynamic Supabase (`prompt.md`) (Gemini Canvas)
 
 **Target**: Analisis file "index.html" dari PROMPT 3 dan buatkan dokumen panduan arsitektur (`prompt.md`) untuk migrasi ke React + Supabase.
 
@@ -93,7 +93,7 @@ Struktur isi "prompt.md" wajib mencakup 4 bagian:
 
 ---
 
-## 📜 PROMPT 5: Eksekusi Development Fullstack Web App
+## 📜 PROMPT 5: Eksekusi Development Fullstack Web App (Gemini + Claude Antigravity)
 
 **Target**: Lakukan refactoring dan bangun arsitektur aplikasi Fullstack secara utuh berdasarkan file "index.html" (PROMPT 3) dan "prompt.md" (PROMPT 4).
 
@@ -115,7 +115,7 @@ Tugas Eksekusi AI Agent:
 
 ---
 
-## 📜 PROMPT 6: Generator Visualisasi Diagram Sistem (Mermaid & HTML)
+## 📜 PROMPT 6: Generator Visualisasi Diagram Sistem (Gemini + Claude Antigravity)
 
 **Target**: Buat diagram sistem interaktif (Diagram Konteks, DFD Level 0, dan ERD) berbasis struktur basis data dari PROMPT 1 & 5.
 
@@ -133,7 +133,7 @@ Tugas Anda:
 
 ---
 
-## 📜 PROMPT 7: Otomatisasi Script Generator Laporan Akhir Akademia (.docx)
+## 📜 PROMPT 7: Otomatisasi Script Generator Laporan Akhir Akademia (Gemini + Claude Antigravity)
 
 **Target**: Buat script Python bawaan (`generate_report.py`) yang menggunakan `python-docx` untuk menghasilkan dokumen Laporan Akhir PBL berkriteria akademik kaku secara otomatis.
 
@@ -156,7 +156,7 @@ Ketentuan Format Akademik Kaku:
 
 ---
 
-## 📜 PROMPT 8: Otomatisasi Script Generator Slide Presentasi (.pptx)
+## 📜 PROMPT 8: Otomatisasi Script Generator Slide Presentasi (Gemini + Claude Antigravity)
 
 **Target**: Buat script Python bawaan (`generate_pptx.py`) yang menggunakan `python-pptx` untuk menghasilkan file Presentasi Proyek (.pptx) 16:9 berdesain modern dan interaktif.
 
@@ -180,7 +180,7 @@ Spesifikasi Slide & Desain:
 
 ---
 
-## 📜 PROMPT 9: Restrukturisasi Repositori & Dokumentasi GitHub (`README.md`)
+## 📜 PROMPT 9: Restrukturisasi Repositori & Dokumentasi GitHub (Gemini + Claude Antigravity)
 
 **Target**: Rapikan seluruh file dokumentasi (`.docx`, `.png`, `.py`, `.html`, `.md`), hapus file sampah/lock, dan buatkan berkas `README.md` utama yang memikat untuk GitHub.
 

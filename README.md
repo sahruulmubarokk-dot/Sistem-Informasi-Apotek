@@ -102,17 +102,24 @@ graph TD
 
 <div align="center">
 
-### **1. Diagram Konteks**
-![Diagram Konteks](docs/assets/diagram_konteks.png)
-*Alur batas sistem dan interaksi antara entitas eksternal (Admin & Kasir) dengan ApotekSim.*
+| 1. Diagram Konteks |
+| :---: |
+| ![Diagram Konteks](docs/assets/diagram_konteks.png) |
+| *Alur batas sistem dan interaksi antara entitas eksternal (Admin & Kasir) dengan ApotekSim.* |
 
-### **2. Data Flow Diagram (DFD Level 0)**
-![DFD Level 0](docs/assets/dfd_level0.png)
-*Peta aliran data komprehensif mencakup Pengadaan Obat, Stok Multi-Batch, POS Kasir, dan Laporan Eksekutif.*
+<br/>
 
-### **3. Entity Relationship Diagram (ERD)**
-![ERD Database](docs/assets/erd_database.png)
-*Struktur relasi basis data PostgreSQL dinormalisasi (Tabel Supplier, Obat, Batch Detail, dan Transaksi).*
+| 2. Data Flow Diagram (DFD Level 0) |
+| :---: |
+| ![DFD Level 0](docs/assets/dfd_level0.png) |
+| *Peta aliran data komprehensif mencakup Pengadaan Obat, Stok Multi-Batch, POS Kasir, dan Laporan Eksekutif.* |
+
+<br/>
+
+| 3. Entity Relationship Diagram (ERD) |
+| :---: |
+| ![ERD Database](docs/assets/erd_database.png) |
+| *Struktur relasi basis data PostgreSQL dinormalisasi (Tabel Supplier, Obat, Batch Detail, dan Transaksi).* |
 
 </div>
 

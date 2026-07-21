@@ -518,9 +518,16 @@ add_custom_p("4. Supabase. (2026). Supabase Documentation: Database Policies and
 add_custom_p("5. Vercel. (2026). Next.js Documentation: Server Actions and Client Components. Diakses dari https://nextjs.org/docs.")
 
 # 3. Save Hasil Laporan Akhir PBL (.docx)
+base_dir = os.path.dirname(os.path.abspath(__file__))
+reports_dir = os.path.abspath(os.path.join(base_dir, "..", "reports"))
+os.makedirs(reports_dir, exist_ok=True)
+target_path = os.path.join(reports_dir, "laporan_akhir_pbl_apotek.docx")
+
 try:
-    doc.save("laporan_akhir_pbl_apotek.docx")
-    print("Sukses total men-generate file 'laporan_akhir_pbl_apotek.docx' dengan spasi 1.5 baris dan margin kaku akademik!")
+    doc.save(target_path)
+    print(f"Sukses total men-generate file '{target_path}' dengan spasi 1.5 baris dan margin kaku akademik!")
 except PermissionError:
-    doc.save("laporan_akhir_pbl_apotek_new.docx")
-    print("Sukses men-generate file 'laporan_akhir_pbl_apotek_new.docx' (file 'laporan_akhir_pbl_apotek.docx' sedang dikunci/dibuka oleh program lain)!")
+    fallback_path = os.path.join(reports_dir, "laporan_akhir_pbl_apotek_new.docx")
+    doc.save(fallback_path)
+    print(f"Sukses men-generate file '{fallback_path}' (file utama sedang dikunci/dibuka oleh program lain)!")
+

@@ -491,7 +491,12 @@ def create_presentation():
         p_dh.alignment = PP_ALIGN.CENTER
 
         # Image if exists
-        img_path = diag["file"]
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        assets_dir = os.path.abspath(os.path.join(base_dir, "..", "assets"))
+        img_path = os.path.join(assets_dir, diag["file"])
+        if not os.path.exists(img_path):
+            img_path = diag["file"]
+
         if os.path.exists(img_path):
             max_iw_in = 3.24
             max_ih_in = 3.6
@@ -711,7 +716,10 @@ def create_presentation():
         pc.space_before = Pt(10)
 
     # Save presentation
-    output_filename = "presentasi-proyek.pptx"
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    reports_dir = os.path.abspath(os.path.join(base_dir, "..", "reports"))
+    os.makedirs(reports_dir, exist_ok=True)
+    output_filename = os.path.join(reports_dir, "presentasi-proyek.pptx")
     prs.save(output_filename)
     print(f"Sukses men-generate {output_filename} dengan desain kreatif, presisi visual & proporsi proporsional!")
 

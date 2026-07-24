@@ -1,6 +1,6 @@
 # 🚀 MASTER PROMPT PIPELINE (END-TO-END SYSTEM DEVELOPMENT & DOCUMENTATION)
 
-Dokumen ini berisi rangkaian **Prompt Terhubung (Step-by-Step Prompt Engineering Flow)** untuk membangun proyek dari nol (konsep & arsitektur), pengembangan aplikasi *Fullstack Web*, pembuatan diagram visual, otomatisasi laporan akademik (`.docx`), otomatisasi slide presentasi (`.pptx`), hingga pengorganisasian repositori dan penyusunan GitHub `README.md` yang profesional.
+Dokumen ini berisi rangkaian **Prompt Terhubung (Step-by-Step Prompt Engineering Flow)** untuk membangun proyek dari nol (konsep & arsitektur), pengembangan aplikasi *Fullstack Web*, pembuatan diagram visual, penyusunan laporan akademik (`.docx`), penyusunan slide presentasi (`.pptx`), hingga pengorganisasian repositori dan penyusunan GitHub `README.md` yang profesional.
 
 ---
 
@@ -13,9 +13,9 @@ graph TD
     P3 --> P4[PROMPT 4: Blueprint Transformasi Supabase]
     P4 --> P5[PROMPT 5: Eksekusi Fullstack Web App]
     P5 --> P6[PROMPT 6: Visualisasi Diagram Mermaid]
-    P6 --> P7[PROMPT 7: Generator Laporan Academic DOCX]
-    P7 --> P8[PROMPT 8: Generator Presentasi PPTX]
-    P8 --> P9[PROMPT 9: Restrukturisasi Docs & README GitHub]
+    P6 --> P7[TAHAP 7: Penyusunan Laporan Academic DOCX]
+    P7 --> P8[TAHAP 8: Desain Slide Presentasi PPTX]
+    P8 --> P9[TAHAP 9: Restrukturisasi Docs & README GitHub]
 ```
 
 ---
@@ -133,15 +133,11 @@ Tugas Anda:
 
 ---
 
-## 📜 PROMPT 7: Otomatisasi Script Generator Laporan Akhir Akademia (.docx)
+## 📜 TAHAP 7: Penyusunan Laporan Akhir Akademia (.docx)
 
-**Target**: Buat script Python bawaan (`generate_report.py`) yang menggunakan `python-docx` untuk menghasilkan dokumen Laporan Akhir PBL berkriteria akademik kaku secara otomatis.
+**Target**: Menyusun dokumen Laporan Akhir PBL format Word (.docx) berkriteria akademik kaku.
 
-**Instruksi Prompt**:
-```text
-Buatkan sebuah script Python ("generate_report.py") yang secara otomatis menghasilkan dokumen Laporan Akhir PBL format Word (.docx) berdasarkan seluruh data arsitektur, fitur, dan pengujian sistem pada proyek ini.
-
-Ketentuan Format Akademik Kaku:
+**Pedoman Penyusunan**:
 1. Margin Halaman: Kiri 4 cm, Atas 3 cm, Kanan 3 cm, Bawah 3 cm.
 2. Jenis Font: Times New Roman, ukuran 12pt untuk teks utama, spasi 1.5 baris, alignment Justify.
 3. Struktur Dokumen Lengkap:
@@ -151,20 +147,14 @@ Ketentuan Format Akademik Kaku:
    - BAB III ANALISIS & PERANCANGAN SISTEM (Diagram Konteks, DFD Level 0, ERD, Deskripsi Tabel & RLS).
    - BAB IV IMPLEMENTASI & PENGUJIANKODING (Tampilan UI, Hasil Black-box Testing Test Cases).
    - BAB V PENUTUP (Kesimpulan & Saran) & DAFTAR PUSTAKA (Style IEEE/APA).
-4. Pastikan script dapat dijalankan dengan command `python generate_report.py` dan menyimpan output ke folder target yang ditentukan.
-```
 
 ---
 
-## 📜 PROMPT 8: Otomatisasi Script Generator Slide Presentasi (.pptx)
+## 📜 TAHAP 8: Desain Slide Presentasi Proyek (.pptx)
 
-**Target**: Buat script Python bawaan (`generate_pptx.py`) yang menggunakan `python-pptx` untuk menghasilkan file Presentasi Proyek (.pptx) 16:9 berdesain modern dan interaktif.
+**Target**: Menyusun file Slide Presentasi Proyek (.pptx) berukuran 16:9 widescreen berdesain modern dan interaktif.
 
-**Instruksi Prompt**:
-```text
-Buatkan script Python ("generate_pptx.py") untuk meng-generate file Slide Presentasi Proyek (.pptx) berukuran 16:9 widescreen dengan kualitas visual tingkat tinggi.
-
-Spesifikasi Slide & Desain:
+**Spesifikasi Slide**:
 1. Palette Warna: Dark Mode Modern (Slate Blue #0F172A, Emerald Green #10B981, Cyan Accent #06B6D4, White Card BG).
 2. Struktur Slide (Minimal 8 Slide Utama):
    - Slide 1: Title & Team Presentation (Nama Proyek, Kampus, Anggota Kelompok).
@@ -175,44 +165,35 @@ Spesifikasi Slide & Desain:
    - Slide 6: Database & RLS Security Rules (Penjelasan RLS & Token JWT).
    - Slide 7: Implementation & Black-box Test Results Table.
    - Slide 8: Conclusion & Future Development.
-3. Otomatiskan peletakan gambar diagram dari folder assets ke dalam container card slide.
-```
 
 ---
 
-## 📜 PROMPT 9: Restrukturisasi Repositori & Dokumentasi GitHub (`README.md`)
+## 📜 TAHAP 9: Restrukturisasi Repositori & Dokumentasi GitHub (`README.md`)
 
-**Target**: Rapikan seluruh file dokumentasi (`.docx`, `.png`, `.py`, `.html`, `.md`), hapus file sampah/lock, dan buatkan berkas `README.md` utama yang memikat untuk GitHub.
+**Target**: Merapikan seluruh file dokumentasi (`.docx`, `.png`, `.html`, `.md`), menghapus file temporary/lock, dan membuat berkas `README.md` utama yang profesional untuk GitHub.
 
-**Instruksi Prompt**:
-```text
-Rapikan seluruh berkas dokumentasi dan struktur luar repositori proyek ini agar siap di-push ke GitHub dengan tampilan yang sangat profesional dan rapi.
-
-Tugas Eksekusi Anda:
+**Poin Restrukturisasi**:
 1. Buat struktur folder dokumentasi `docs/`:
    - `docs/assets/`: Simpan seluruh screenshot UI (`ui_*.png`), diagram (`dfd_level0.png`, `diagram_konteks.png`, `erd_database.png`), dan logo `UNITOMO.jpg`.
    - `docs/reports/`: Simpan dokumen `.docx` dan slide `.pptx`.
-   - `docs/generators/`: Simpan script Python generator (`generate_report.py`, `generate_pptx.py`).
    - `docs/diagrams_html/`: Simpan file HTML diagram Mermaid.
    - `docs/demo/`: Simpan prototype standalone HTML (`index.html`).
    - `docs/notes/`: Simpan file catatan markdown (`Format-Laporan.md`, `promt*.md`).
-2. Perbarui path relasi pada script Python generator agar mengarah secara dinamis ke sub-folder `docs/`.
-3. Buat file `.gitignore` di root repositori untuk mengabaikan temporary lock files MS Office (`~$*.docx`), `node_modules/`, `.env`, `dist/`, dan cache Python (`__pycache__/`).
-4. Buat file `README.md` utama di root yang dilengkapi dengan:
-   - Header Badges (React, Vite, Supabase, Tailwind, Python).
+2. Buat file `.gitignore` di root repositori untuk mengabaikan temporary lock files MS Office (`~$*.docx`), `node_modules/`, `.env`, `dist/`.
+3. Buat file `README.md` utama di root yang dilengkapi dengan:
+   - Header Badges (React, Vite, Supabase, Tailwind).
    - Showcase UI Grid Table (screenshot tampilan fitur).
    - Embedded Diagram Konteks, DFD 0, dan ERD.
    - Tree Diagram Struktur Repositori.
-   - Quickstart Installation Guide & Python Execution Guide.
+   - Quickstart Installation Guide.
    - Indeks Link Dokumentasi Lengkap.
-```
 
 ---
 
 ## 💡 Petunjuk Penggunaan
 
-1. **Jalankan Secara Berurutan (Sequential Execution)**: Jangan melompati prompt. Setiap prompt dirancang bergantung pada masukan/keluaran dari prompt sebelumnya.
-2. **AI Tool Mapping**:
+1. **Jalankan Secara Berurutan (Sequential Execution)**: Setiap tahapan dirancang bergantung pada masukan/keluaran dari tahap sebelumnya.
+2. **Resource Mapping**:
    - **Step 1 - 4**: Gunakan **Gemini Canvas** untuk perencanaan arsitektur, workflow, prototipe HTML statis, dan penulisan blueprint migrasi (`prompt.md`).
-   - **Step 5 - 9**: Gunakan **Gemini + Claude (Antigravity Agent)** untuk eksekusi kode Fullstack, pembuatan diagram Mermaid, pembuatan script generator Python (`.docx`/`.pptx`), serta perapihan repositori dan penyusunan `README.md`.
-3. **Hasil Akhir**: Mengikuti 9 tahapan prompt ini secara utuh akan menghasilkan **repositori web app fullstack production-ready** beserta **dokumentasi laporan & presentasi lengkap**.
+   - **Step 5 - 6**: Gunakan **Gemini + Claude (Antigravity Agent)** untuk eksekusi kode Fullstack React + Supabase dan pembuatan diagram Mermaid.
+   - **Tahap 7 - 9**: Dilakukan oleh **Tim Developer** untuk penyusunan Laporan, Slide Presentasi, dan Quality Assurance repositori.

@@ -13,7 +13,6 @@
 [![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-38BDF8?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 [![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com/)
-[![Python Generator](https://img.shields.io/badge/Python-Docx_%26_PPTX-3776AB?style=for-the-badge&logo=python)](https://python.org/)
 
 [🖥️ Interactive UI Demo](docs/demo/index.html) • [📹 Putar / Download Video MP4](https://raw.githubusercontent.com/sahruulmubarokk-dot/Sistem-Informasi-Apotek/main/docs/reports/vidio-demonstrasi.mp4) • [📜 Master Prompt Pipeline](docs/notes/history-promt.md) • [📄 Laporan (.docx)](docs/reports/laporan_akhir_pbl_apotek.docx) • [📕 Laporan (.pdf)](docs/reports/laporan_akhir_pbl_apotek.pdf) • [📊 Slide Presentasi (.pptx)](docs/reports/presentasi-proyek.pptx)
 
@@ -25,22 +24,21 @@
 
 Proyek ini dibangun sebagai bagian dari **Tugas Kuliah Project-Based Learning (PBL)** di **Universitas Dr. Soetomo (UNITOMO) Surabaya**. 
 
-Fokus utama dari proyek ini adalah **mengimplementasikan Metodologi Pengembangan Perangkat Lunak Berbasis Kecerdasan Buatan (AI-Driven Software Engineering & Prompt Engineering Pipeline)**. Seluruh tahapan pengembangan—mulai dari perancangan arsitektur basis data, prototipe antarmuka (UI), transformasi kode fullstack, otomatisasi diagram sistem, hingga penyusunan laporan akademik `.docx` dan slide presentasi `.pptx`—dieksekusi melalui kolaborasi terstruktur dengan **AI Agent**.
+Fokus utama dari proyek ini adalah **mengimplementasikan Metodologi Pengembangan Perangkat Lunak Berbasis Kecerdasan Buatan (AI-Driven Software Engineering & Prompt Engineering Pipeline)** untuk pembangunan aplikasi web fullstack, perancangan arsitektur basis data, prototipe antarmuka (UI), hingga otomatisasi diagram sistem. Tahapan pengkodean aplikasi dan diagram sistem dieksekusi melalui kolaborasi terstruktur dengan **AI Agent**.
 
 ### 🛠️ AI Tools & Teknologi Kecerdasan Buatan yang Digunakan:
 
 | Tool AI / Engine | Tahapan Penggunaan | Peran & Kontribusi Utama dalam Proyek |
 | :--- | :---: | :--- |
 | 🔵 **Gemini Canvas** | **Step 1 - 4** | Eksperimentasi konsep arsitektur basis data, perencanaan workflow, pembuatan prototipe UI HTML statis (`index.html`), dan penyusunan blueprint migrasi dinamis (`prompt.md`). |
-| 🤖 **Gemini + Claude (Antigravity Agent)** | **Step 5 - 9** | *Autonomous Agentic Coding* untuk refactoring Fullstack React + Supabase, pembuatan diagram Mermaid, penulisan script generator Python (`docx`/`pptx`), pengujian sistem, dan perapihan repositori. |
+| 🤖 **Gemini + Claude (Antigravity Agent)** | **Step 5 - 6** | *Autonomous Agentic Coding* untuk refactoring Fullstack React + Supabase, pembuatan diagram Mermaid, dan pengujian integrasi sistem. |
 | 🧜‍♂️ **Mermaid.js Engine** | **Step 6** | Menghasilkan diagram visual sistem (Diagram Konteks, DFD Level 0, & ERD) secara otomatis via sintaks deklaratif. |
-| 🐍 **Python (`python-docx` & `python-pptx`)** | **Step 7 - 8** | Script otomatisasi berbasis AI untuk meng-generate dokumen Laporan Akhir PBL sesuai margin akademik kaku (4-3-3-3cm) dan slide presentasi 16:9 modern. |
 
 ---
 
 ## 📜 Master Prompt Pipeline (Petunjuk Prompt Tahap demi Tahap)
 
-Pengembangan proyek ini menggunakan alur **9-Stage Master Prompt Pipeline** yang saling terhubung secara runtut (*interconnected prompt engineering flow*). Setiap tahapan prompt memanfaatkan keluaran dari tahap sebelumnya:
+Pengembangan proyek ini menggunakan alur **Master Prompt Pipeline** yang saling terhubung secara runtut (*interconnected engineering flow*). Setiap tahapan memanfaatkan keluaran dari tahap sebelumnya:
 
 ```mermaid
 graph TD
@@ -49,14 +47,14 @@ graph TD
     P3 --> P4["PROMPT 4: Blueprint Transformasi Supabase (Gemini Canvas)"]
     P4 --> P5["PROMPT 5: Eksekusi Fullstack Web App (Gemini + Claude Antigravity)"]
     P5 --> P6["PROMPT 6: Diagram Mermaid DFD/ERD (Gemini + Claude Antigravity)"]
-    P6 --> P7["PROMPT 7: Generator Laporan Academic DOCX (Gemini + Claude Antigravity)"]
-    P7 --> P8["PROMPT 8: Generator Presentasi PPTX (Gemini + Claude Antigravity)"]
-    P8 --> P9["PROMPT 9: Restrukturisasi Repositori & README (Gemini + Claude Antigravity)"]
+    P6 --> P7["TAHAP 7: Penyusunan Laporan Academic DOCX (Tim Developer)"]
+    P7 --> P8["TAHAP 8: Desain Slide Presentasi PPTX (Tim Developer)"]
+    P8 --> P9["TAHAP 9: Restrukturisasi Repositori & Final QA (Tim Developer)"]
 ```
 
-### 📋 Ringkasan Matriks Prompt Engineering:
+### 📋 Ringkasan Matriks Prompt & Tahapan Engineering:
 
-| Tahap | Fokus Prompt | Input & Prasyarat | Output yang Dihasilkan | Alat AI Utama |
+| Tahap | Fokus Development | Input & Prasyarat | Output yang Dihasilkan | Pelaksana / Tools |
 | :---: | :--- | :--- | :--- | :---: |
 | **1** | **Arsitektur DB & Fitur** | Spesifikasi Bisnis Apotek | Schema 3 Tabel Utama & Blueprint Fitur Admin/Kasir | **Gemini Canvas** |
 | **2** | **Workflow & Tech Stack** | Hasil Prompt 1 | Alur Bisnis Step-by-Step & Stack React + Supabase | **Gemini Canvas** |
@@ -64,9 +62,9 @@ graph TD
 | **4** | **Blueprint Migration (`prompt.md`)** | File `index.html` | Dokumentasi Analisis Celah & SoC Guide (`prompt.md`) | **Gemini Canvas** |
 | **5** | **Fullstack Execution** | `index.html` & `prompt.md` | Aplikasi Web Modern di [`Frontend/`](Frontend/) & [`Backend/`](Backend/) | **Gemini + Claude Antigravity Agent** |
 | **6** | **Diagram System Rendering** | Schema DB & Workflow | HTML Diagram Renderers di [`docs/diagrams_html/`](docs/diagrams_html/) | **Gemini + Claude Antigravity Agent** |
-| **7** | **Academic DOCX Generator** | Data Proyek & Testing | Script [`docs/generators/generate_report.py`](docs/generators/generate_report.py) -> `.docx` | **Gemini + Claude Antigravity Agent** |
-| **8** | **Presentation PPTX Generator** | Visual Assets & Metrics | Script [`docs/generators/generate_pptx.py`](docs/generators/generate_pptx.py) -> `.pptx` | **Gemini + Claude Antigravity Agent** |
-| **9** | **Repo Restructuring & README** | Seluruh Berkas Proyek | Folder `docs/` Terorganisir, `.gitignore`, & `README.md` | **Gemini + Claude Antigravity Agent** |
+| **7** | **Penyusunan Laporan Academic** | Data Proyek & Testing | Dokumen Laporan Akhir Akademik [`docs/reports/laporan_akhir_pbl_apotek.docx`](docs/reports/laporan_akhir_pbl_apotek.docx) | **Tim Developer** |
+| **8** | **Desain Slide Presentasi** | Visual Assets & Metrics | Slide Presentasi Modern 16:9 [`docs/reports/presentasi-proyek.pptx`](docs/reports/presentasi-proyek.pptx) | **Tim Developer** |
+| **9** | **Restrukturisasi & Final QA** | Seluruh Berkas Proyek | Folder `docs/` Terorganisir, `.gitignore`, & `README.md` | **Tim Developer** |
 
 > 💡 *Sintaks lengkap dan instruksi rinci dari setiap prompt dapat diakses di dokumen **[history-promt.md](history-promt.md)**.*
 
@@ -78,7 +76,6 @@ graph TD
 - **🛒 Point of Sales (POS) Kasir**: Fitur pencarian cepat obat, kalkulasi total harga otomatis, dan sistem proteksi modal skrining resep dokter untuk obat golongan Obat Keras (G).
 - **📊 Dasbor Eksekutif & Peringatan Stok Minimum**: Visualisasi indikator warna real-time untuk pemantauan sisa stok, peringatan obat mendekati expired, dan grafik ringkasan transaksi bulanan.
 - **🛡️ PostgreSQL Row Level Security (RLS)**: Penerapan kebijakan keamanan database di mana role Kasir hanya diberi hak akses baca (*SELECT*) dan pemotongan stok transaksional, sedangkan role Admin memiliki akses penuh mutasi data.
-- **📑 Document Generator Bawaan**: Script Python mandiri untuk meng-generate dokumen Laporan Akhir PBL akademik (`.docx`) dan slide presentasi 16:9 (`.pptx`) berbasis data live sistem.
 
 ---
 
@@ -137,13 +134,12 @@ Sistem-Informasi-Apotek/
 │   └── vite.config.ts          # Vite Configuration
 ├── Backend/                    # Backend Configuration & Database
 │   └── supabase/               # SQL Schema, Migrations, & RLS Security Policies
-├── docs/                       # Dokumentasi Terstruktur & Berkas Generator
+├── docs/                       # Dokumentasi Terstruktur Proyek
 │   ├── assets/                 # Screenshot UI & File Diagram (.png/.jpg)
 │   ├── reports/                # Laporan Akhir PBL (.docx) & Presentasi (.pptx)
-│   ├── generators/             # Script Python Generator (generate_report.py & generate_pptx.py)
 │   ├── diagrams_html/          # Renderer Diagram Mermaid.js (render_*.html)
 │   ├── demo/                   # Standalone Interactive HTML Prototype (index.html)
-│   └── notes/                  # Format Laporan, Prompt Notes, & Master Prompt Pipeline
+│   └── notes/                  # Format Laporan & Master Prompt Pipeline
 ├── .gitignore                  # Aturan penanganan file sampel, env, & lock files
 └── README.md                   # Dokumentasi Utama Repositori (File Ini)
 ```
@@ -154,7 +150,6 @@ Sistem-Informasi-Apotek/
 
 ### **1. Prasyarat Sistem**
 - **Node.js** v18+ dan `npm`
-- **Python** 3.10+ (disertai `python-docx`, `python-pptx`, dan `pillow`)
 - Akun **Supabase** (untuk database cloud PostgreSQL)
 
 ---
@@ -186,33 +181,13 @@ Anda dapat menguji antarmuka prototipe UI tanpa perlu menjalankan server Node.js
 
 ---
 
-### **4. Menguji Script Python Document Generators**
-
-Untuk meng-generate ulang dokumen Laporan Academic (`.docx`) atau Presentasi (`.pptx`):
-
-```bash
-# Pastikan library Python terinstall
-py -m pip install python-docx python-pptx pillow
-
-# Menjalankan Generator Laporan Akademia (.docx)
-py docs/generators/generate_report.py
-
-# Menjalankan Generator Slide Presentasi (.pptx)
-py docs/generators/generate_pptx.py
-```
-*Hasil file otomatis dibuat dan disimpan di folder **[`docs/reports/`](docs/reports/)**.*
-
----
-
 ## 📑 Indeks Dokumentasi Proyek
 
 - [📹 Video Demonstrasi Sistem (.mp4)](https://raw.githubusercontent.com/sahruulmubarokk-dot/Sistem-Informasi-Apotek/main/docs/reports/vidio-demonstrasi.mp4): Berkas video rekaman peragaan fitur 3 role (Admin, Apoteker, Kasir).
-- [📜 Master Prompt Pipeline Guide](docs/notes/history-promt.md): Panduan urutan prompt 1-9 dari konsep hingga deployment.
+- [📜 Master Prompt Pipeline Guide](docs/notes/history-promt.md): Panduan urutan prompt 1-6 dan tahapan proyek hingga deployment.
 - [📄 Laporan Akhir PBL (.docx)](docs/reports/laporan_akhir_pbl_apotek.docx): Dokumen formal akademik Word (margin 4-3-3-3cm).
 - [📕 Laporan Akhir PBL (.pdf)](docs/reports/laporan_akhir_pbl_apotek.pdf): Berkas PDF Laporan Akhir PBL siap cetak/kumpul.
 - [📊 Slide Presentasi Proyek (.pptx)](docs/reports/presentasi-proyek.pptx): Presentation deck 16:9 berdesain profesional.
-- [⚙️ Generator Script Laporan](docs/generators/generate_report.py): Script Python pembentuk dokumen Word.
-- [🎨 Generator Script Presentasi](docs/generators/generate_pptx.py): Script Python pembentuk slide PowerPoint.
 
 ---
 

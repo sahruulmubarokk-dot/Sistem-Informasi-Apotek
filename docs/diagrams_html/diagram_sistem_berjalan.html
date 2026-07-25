@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagram Sistem Berjalan</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 32px;
+            max-width: 1000px;
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .card-header {
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0 0 8px 0;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">Diagram Sistem Berjalan</h1>
+        </div>
+        <div class="mermaid">
+flowchart TD
+    %% Styling classes
+    classDef startEnd fill:#f87171,stroke:#b91c1c,stroke-width:2px,color:white;
+    classDef process fill:#60a5fa,stroke:#2563eb,stroke-width:2px,color:white;
+    classDef manualDoc fill:#fde047,stroke:#ca8a04,stroke-width:2px,color:black;
+
+    %% Subgraphs
+    subgraph Pemasok ["🏢 Supplier / PBF"]
+        S1([Kirim Obat & Faktur Fisik]):::startEnd
+    end
+
+    subgraph Petugas ["👨⚕️ Petugas / Apoteker"]
+        P1(Terima Obat & Faktur):::process
+        P2[/Catat di Buku Manual / Spreadsheet/]:::manualDoc
+        P3(Simpan Obat di Rak Acak):::process
+        P4(Stock Opname Fisik Bulanan):::process
+    end
+
+    subgraph Kasir ["💻 Kasir Apotek"]
+        K1(Terima Pesanan):::process
+        K2(Cari Obat di Rak secara Manual):::process
+        K3(Hitung Harga dgn Kalkulator):::process
+        K4[/Tulis Nota Kertas/]:::manualDoc
+        K5(Rekap Uang & Nota Harian):::process
+    end
+
+    subgraph Konsumen ["🛒 Pembeli"]
+        C1([Datang Membeli Obat]):::startEnd
+        C2([Terima Obat & Nota Manual]):::startEnd
+    end
+
+    %% Relasi Pengadaan
+    S1 --> P1
+    P1 --> P2
+    P2 --> P3
+
+    %% Relasi Penjualan
+    C1 --> K1
+    K1 --> K2
+    K2 --> K3
+    K3 --> K4
+    K4 --> C2
+
+    %% Relasi Pelaporan
+    K4 --> K5
+    K5 -.->|Dicocokkan Akhir Bulan| P4
+    P3 -.->|Dihitung Ulang Fisik| P4
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@9.3.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true });</script>
+</body>
+</html>

@@ -30,6 +30,10 @@ venv/
 .venv/
 ENV/
 
+# Scratch & Backup Files
+scratch/
+*_backup.docx
+
 # System & IDE Files
 .DS_Store
 Thumbs.db

@@ -1,16 +1,35 @@
-## 🤖 PANDUAN UNTUK AI AGENT
+# 🤖 PANDUAN AI AGENT & KETENTUAN PENYUSUNAN LAPORAN AKHIR PBL
 
-### 1. KONTEKS & TUGAS UTAMA
-*   Anda sudah memahami dan mengingat seluruh detail proyek PBL (Project-Based Learning) yang dibahas pada sesi sebelumnya.
-*   Tugas Anda sekarang adalah menyusun dan mengekspor seluruh isi **Laporan Akhir PBL** tersebut ke dalam format kode **Markdown (.md)** yang utuh dan siap pakai.
-*   Laporan harus disusun mengikuti dokumen **Outline Laporan Akhir** yang telah dilampirkan sebelumnya.
+Document ini berisi acuan utama bagi AI Agent & Tim Developer dalam menyusun serta memvalidasi **Laporan Akhir Project-Based Learning (PBL)** proyek **ApotekSim - Sistem Informasi Apotek Modern**.
 
-### 2. KETENTUAN ANGGOTA KELOMPOK & IDENTITAS
-Pastikan di bagian halaman judul/identitas laporan, Anda memasukkan data kelompok berikut:
-*   **Jumlah Anggota:** 1 Kelompok terdiri dari 3 Orang.
-*   **Identitas Kampus:** Sediakan placeholder visual atau teks yang rapi untuk penempatan **Logo Universitas** serta **Nama & NIM Anggota** kelompok.
+---
 
-### 3. KUALITAS & KEDALAMAN KONTEN (MAKSIMAL)
-*   **Bahasa:** Gunakan Bahasa Indonesia formal, baku, dan sesuai dengan standar penulisan karya ilmiah akademik (PUEBI).
-*   **Kedalaman Materi:** Jangan meringkas atau memotong penjelasan. Jabarkan setiap Bab dan Sub-bab secara mendalam, detail, dan komprehensif.
-*   **Struktur Markdown:** Gunakan sintaks Markdown yang rapi dan terstruktur secara hierarkis (Heading `#`, `##`, `###`, tabel untuk data/pengujian, bullet points, dan blockquotes jika diperlukan).
+## 1. KONTEKS & TUGAS UTAMA
+*   **Pemahaman Proyek**: Anda memahami seluruh siklus pengembangan aplikasi ApotekSim berbasis arsitektur **Fullstack Web (React 18 + Vite 5 + TypeScript + Tailwind CSS 3.4)** yang terintegrasi dengan **Supabase (PostgreSQL 15)**, fitur **Multi-Batch FEFO**, dan **Row Level Security (RLS)**.
+*   **Tugas Eksekusi**: Menyusun dan merevisi berkas dokumentasi laporan akademik (`.docx` & `.pdf`), slide presentasi (`.pptx`), serta berkas repositori GitHub agar 100% konsisten.
+*   **Acuan Format**: Penulisan wajib mengikuti struktur outline yang ditetapkan pada dokumen [`Format-Laporan.md`](Format-Laporan.md).
+
+---
+
+## 2. KETENTUAN ANGGOTA KELOMPOK & IDENTITAS AKADEMIK
+Di setiap bagian Halaman Judul, Lembar Pengesahan, dan Identitas Laporan, masukkan data resmi kelompok berikut:
+
+*   **Institusi Akademik**: Universitas Dr. Soetomo (UNITOMO) Surabaya
+*   **Fakultas / Program Studi**: Fakultas Teknik / Teknik Informatika
+*   **Mata Kuliah**: Project-Based Learning (PBL)
+*   **Tahun Akademik**: 2026
+
+### 👥 Identitas Anggota Kelompok 4:
+
+| No | Nama Lengkap | NIM | Peran / Spesialisasi Utama |
+| :-: | :--- | :---: | :--- |
+| **1** | **Fahri Adis Al Hafni** | `202511420105` | Fullstack Developer & Database Designer |
+| **2** | **Sahrul Mubarok** | `202511420107` | Backend & Cloud Infrastructure Engineer |
+| **3** | **Ach Tohir** | `202511420048` | Frontend UI/UX & QA Testing Specialist |
+
+---
+
+## 3. KUALITAS & KEDALAMAN KONTEN AKADEMIK
+*   **Bahasa Karya Ilmiah**: Gunakan Bahasa Indonesia formal, baku, dan sesuai dengan standar Pedoman Umum Ejaan Bahasa Indonesia (PUEBI/EYD).
+*   **Kedalaman Materi**: Jabarkan setiap Bab dan Sub-Bab (Bab I s/d Bab V) secara mendalam, rinci, dan komprehensif tanpa memotong atau mengaburkan rumus matematis FEFO, skema RLS, dan tabel pengujian.
+*   **Struktur Markdown**: Gunakan sintaks Markdown yang terstruktur hierarkis (`#`, `##`, `###`, tabel pengujian Black-box, blockquote alerts, dan rumus LaTeX).

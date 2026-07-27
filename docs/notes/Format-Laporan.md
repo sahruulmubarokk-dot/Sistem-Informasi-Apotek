@@ -150,7 +150,7 @@ BAB II: LANDASAN TEORI
 
 2.2 Manajemen Inventaris Metode FEFO (First Expired, First Out)
 
-2.3 Arsitektur Modern Full-Stack (Next.js & TypeScript)
+2.3 Arsitektur Modern Full-Stack (React, Vite & TypeScript)
 
 2.4 Cloud Backend-as-a-Service (Supabase & PostgreSQL)
 
@@ -216,7 +216,7 @@ Bagaimana merancang arsitektur basis data relasional yang ternormalisasi untuk s
 
 Bagaimana mengimplementasikan sistem antrean pengeluaran barang berbasis First Expired, First Out (FEFO) secara otomatis pada saat proses transaksi kasir (Point of Sales) berlangsung?
 
-Bagaimana membangun sistem informasi apotek dengan mematuhi prinsip Clean Code dan Separation of Concerns (SoC) menggunakan integrasi kerangka kerja Next.js dan Supabase?
+Bagaimana membangun sistem informasi apotek dengan mematuhi prinsip Clean Code dan Separation of Concerns (SoC) menggunakan integrasi kerangka kerja React + Vite dan Supabase?
 
 Bagaimana mengamankan transaksi data finansial dan operasional apotek dari manipulasi siber sisi klien menggunakan kebijakan keamanan database yang kokoh?
 
@@ -228,7 +228,7 @@ Fokus Operasional: Sistem mencakup pengelolaan data master obat, data master sup
 
 Teknologi Backend: Basis data dan layanan infrastruktur server sepenuhnya menggunakan ekosistem Supabase BaaS yang ditenagai oleh PostgreSQL.
 
-Teknologi Frontend: Menggunakan Next.js/React.js dengan bahasa pemrograman TypeScript dan pustaka gaya Tailwind CSS serta komponen visual Shadcn/ui.
+Teknologi Frontend: Menggunakan React 18 + Vite 5 dengan bahasa pemrograman TypeScript dan pustaka gaya Tailwind CSS 3.4.
 
 Konektivitas: Sistem diasumsikan berjalan dalam kondisi terhubung dengan jaringan internet (online-first system) agar sinkronisasi data real-time dapat berfungsi.
 
@@ -252,7 +252,7 @@ Bagi Pemilik dan Manajemen Apotek: Membantu mengoptimalkan efisiensi kerja staf,
 
 Bagi Apoteker dan Staf Kasir: Mempermudah pekerjaan transaksi harian, mengeliminasi proses pengecekan fisik stok secara manual yang memakan waktu, serta menjaga kepatuhan hukum transaksi obat keras melalui form skrining resep digital.
 
-Bagi Bidang Akademis dan Mahasiswa: Menjadi referensi ilmiah nyata mengenai penerapan arsitektur web modern full-stack (Serverless / Cloud-native) yang memanfaatkan kombinasi Next.js, TypeScript, dan Supabase untuk memecahkan kasus bisnis dunia nyata.
+Bagi Bidang Akademis dan Mahasiswa: Menjadi referensi ilmiah nyata mengenai penerapan arsitektur web modern full-stack (Serverless / Cloud-native) yang memanfaatkan kombinasi React, Vite, TypeScript, dan Supabase untuk memecahkan kasus bisnis dunia nyata.
 
 \pagebreak
 
@@ -282,9 +282,9 @@ $$Q_{\text{sisa}}^{(i)} = Q_{\text{sisa}}^{(i-1)} - d_i \quad \text{dengan} \qua
 
 Proses ini terus berjalan hingga $Q_{\text{sisa}} = 0$. Jika $Q > \sum_{i=1}^{n} q_i$, sistem akan menolak transaksi karena jumlah stok total tidak mencukupi permintaan. Implementasi otomatisasi FEFO pada database mencegah apoteker salah mengambil obat berumur pendek dan mengoptimalkan sisa masa simpan produk di rak apotek.
 
-2.3 Arsitektur Modern Full-Stack (Next.js & TypeScript)
+2.3 Arsitektur Modern Full-Stack (React, Vite & TypeScript)
 
-Pengembangan web modern bergeser ke arah arsitektur terisolasi yang mengutamakan kecepatan render dan keamanan tipe data. Next.js sebagai kerangka kerja React tingkat lanjut (React Framework for the Web) mengintegrasikan kemampuan Server-Side Rendering (SSR) dan Static Site Generation (SSG) dengan Hydration di sisi klien. Pendekatan ini meminimalkan beban komputasi di browser kasir karena halaman analitik atau laporan keuangan yang rumit diproses terlebih dahulu di server sebelum dikirim dalam bentuk HTML statis siap saji.
+Pengembangan web modern bergeser ke arah arsitektur terisolasi yang mengutamakan kecepatan render dan keamanan tipe data. React 18 yang dikombinasikan dengan Vite 5 sebagai kerangka kerja build modern mengintegrasikan kemampuan Fast Refresh dan Single-Page Application (SPA) reaktif dengan komponen modular di sisi klien. Pendekatan ini meminimalkan beban komputasi di browser kasir karena data diambil secara asinkron dari API Supabase Backend.
 
 Penggunaan bahasa TypeScript menambahkan lapisan keamanan statis (static type-safety) di atas JavaScript. Dengan TypeScript, definisi skema objek obat dan transaksi dikunci sejak tahap penulisan kode. Hal ini mencegah terjadinya runtime errors yang fatal, seperti kesalahan pengiriman data harga (bertipe string alih-alih number) ke database yang dapat mengacaukan perhitungan matematis total omset penjualan.
 
@@ -554,7 +554,7 @@ BAB IV: IMPLEMENTASI DAN PENGUJIAN
 
 Implementasi fisik sistem dilakukan pada lingkungan pengembangan dengan spesifikasi teknis sebagai berikut:
 
-Sisi Klien (Frontend): Next.js 14 (App Router) menggunakan runtime Node.js v20.x, diprogram menggunakan TypeScript. Gaya komponen visual dibangun menggunakan Tailwind CSS v4 dan pustaka UI Shadcn/ui berbasis Radix Primitives.
+Sisi Klien (Frontend): React 18 + Vite 5 menggunakan runtime Node.js v18+, diprogram menggunakan TypeScript 5.2. Gaya komponen visual dibangun menggunakan Tailwind CSS v3.4 dan Lucide React icons.
 
 Sisi Backend & Cloud Service: Supabase Cloud Platform. Database PostgreSQL v15 host lokal yang dikelola oleh Supabase CLI untuk mengotomatisasi migrasi.
 
@@ -566,7 +566,7 @@ Prototipe HTML statis yang telah dikembangkan diuji fungsionalitas visualnya, ke
 
 Isolasi State Keranjang Belanja: File HTML statis yang menyimpan data keranjang dalam memori lokal sementara dipindahkan ke dalam React State di dalam custom hook useCart.ts.
 
-Dinamisasi Komponen POS: Skrining resep dokter yang sebelumnya disembunyikan menggunakan manipulasi DOM vanilla-JS diubah menjadi conditional rendering reaktif Next.js berbasis state transactionType == 'resep'.
+Dinamisasi Komponen POS: Skrining resep dokter yang sebelumnya disembunyikan menggunakan manipulasi DOM vanilla-JS diubah menjadi conditional rendering reaktif React berbasis state transactionType == 'resep'.
 
 Dinamisasi Katalog & Real-Time Sync: Data statis katalog obat diganti dengan fetching data asinkron dari Supabase melalui fungsi di dbMedicine.ts. Listener WebSockets dipasang untuk memantau perubahan database sehingga stok yang tampil di layar kasir selalu akurat.
 
@@ -676,7 +676,7 @@ BAB V: PENUTUP
 
 Berdasarkan seluruh tahapan analisis, perancangan, implementasi, dan pengujian yang telah dilaksanakan pada proyek Project-Based Learning ini, dapat ditarik beberapa kesimpulan sebagai berikut:
 
-Purwarupa Sistem Informasi Apotek (ApotekSim) berhasil dibangun dengan mengimplementasikan arsitektur modern full-stack menggunakan kerangka kerja Next.js dan didukung penuh oleh layanan Cloud Backend-as-a-Service dari Supabase (PostgreSQL).
+Purwarupa Sistem Informasi Apotek (ApotekSim) berhasil dibangun dengan mengimplementasikan arsitektur modern full-stack menggunakan kerangka kerja React + Vite dan didukung penuh oleh layanan Cloud Backend-as-a-Service dari Supabase (PostgreSQL).
 
 Perancangan basis data relasional yang dinormalisasi berhasil memisahkan data master statis dengan data mutasi transaksional yang dinamis, sehingga meminimalkan redundansi data dan meningkatkan kecepatan eksekusi query.
 
